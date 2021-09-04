@@ -1,68 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-//import BootcampSummary from './bootcampSummary';
+import FlatList from 'flatlist-react';
+import firebase from 'firebase';
 
+const myCollection = firebase.firestore().collection("myCollection");
+myCollection .onSnapshot((snapshot) => {
+    const data = snapshot.docs.map((doc) => ({id: doc.id, ...doc.data(),}));
+    });
 const BootcampList = () => {
     return (
         <React.Fragment>
-        <div className="bootcamp-list section">
-
-            <Link to={'/bootcampdetails'}>
-            <div class="row">
-              <div class="col s12 m6">
-                <div class="card purple darken-3">
-                  <div class="card-content white-text">
-                    <span class="card-title">Bootstrap</span>
-                    
-                  </div>
-    
-                </div>
-              </div>
+            <div className="bootcamp-list section">
+                <Link to={'/bootcampdetails'}>
+                    <FlatList />
+                </Link>
             </div>
-            </Link>
-
-            <Link to={'/bootcampdetails'}>
-            <div class="row">
-              <div class="col s12 m6">
-                <div class="card purple darken-3">
-                  <div class="card-content white-text">
-                    <span class="card-title">React</span>
-                    
-                  </div>
-    
-                </div>
-              </div>
-            </div>
-            </Link>
-
-            <Link to={'/bootcampdetails'}>
-            <div class="row">
-              <div class="col s12 m6">
-                <div class="card purple darken-3">
-                  <div class="card-content white-text">
-                    <span class="card-title">React Native</span>
-                    
-                  </div>
-    
-                </div>
-              </div>
-            </div>
-            </Link>
-
-            <Link to={'/bootcampdetails'}>
-            <div class="row">
-              <div class="col s12 m6">
-                <div class="card purple darken-3">
-                  <div class="card-content white-text">
-                    <span class="card-title">Node</span>
-                    
-                  </div>
-    
-                </div>
-              </div>
-            </div>
-            </Link>
-        </div>
         </React.Fragment>
     )
 }
